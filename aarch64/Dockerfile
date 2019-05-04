@@ -1,4 +1,4 @@
-FROM balenalib/aarch64-alpine-node:8.15.1-3.9-run
+FROM arm64v8/node:lts-alpine
 
 # Experimental ARMv8 support for Node-RED
 
