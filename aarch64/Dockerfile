@@ -7,7 +7,7 @@ FROM balenalib/aarch64-alpine-node:8.15.1-3.9-run
 # Add node-red user so we aren't running as root.
 RUN mkdir -p /usr/src/node-red \
     && mkdir /data \
-    && useradd --home-dir /usr/src/node-red --no-create-home node-red \
+    && adduser -h /usr/src/node-red -H -D node-red node-red \
     && chown -R node-red:node-red /data \
     && chown -R node-red:node-red /usr/src/node-red
 
@@ -20,6 +20,9 @@ COPY package.json /usr/src/node-red/
 RUN npm install
 
 # User configuration directory volume
+VOLUME [ "/data" ]
+
+# Exposing port
 EXPOSE 1880
 
 # Environment variable holding file path for flows configuration
